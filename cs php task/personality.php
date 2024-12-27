@@ -7,45 +7,45 @@ if (!isset($_SESSION['score'])) {
     exit();
 }
 
-// Define personality types and corresponding icons
-$personality_types = [
-    'Extrovert' => [
-        'description' => 'You are outgoing and enjoy spending time with others! Your adventurous spirit leads you to explore new opportunities.',
-        'icon' => 'fas fa-users' // Font Awesome icon for Extrovert
+// Define the Hogwarts houses and their corresponding descriptions and icons
+$houses = [
+    'Gryffindor' => [
+        'description' => 'You are courageous and brave, always ready to stand up for what is right. Your adventurous spirit and determination make you a true Gryffindor!',
+        'icon' => 'fas fa-paw'
     ],
-    'Introvert' => [
-        'description' => 'You are more reserved and enjoy reflecting on your thoughts. You find peace in solitude and introspection.',
-        'icon' => 'fas fa-user' // Font Awesome icon for Introvert
+    'Hufflepuff' => [
+        'description' => 'You are loyal and hardworking, valuing fairness and kindness above all. Your dedication and warmth shine brightly in Hufflepuff!',
+        'icon' => 'fas fa-leaf'
     ],
-    'Creative Thinker' => [
-        'description' => 'You are imaginative and love engaging in creative hobbies. You look at the world from a unique perspective.',
-        'icon' => 'fas fa-lightbulb' // Font Awesome icon for Creative Thinker
+    'Ravenclaw' => [
+        'description' => 'You are wise and creative, with a love for learning and discovery. Your intellect and curiosity define you as a true Ravenclaw!',
+        'icon' => 'fas fa-crow'
     ],
-    'Logical Thinker' => [
-        'description' => 'You are analytical and prefer structured thinking. You value facts and logical reasoning over emotions.',
-        'icon' => 'fas fa-cogs' // Font Awesome icon for Logical Thinker
+    'Slytherin' => [
+        'description' => 'You are ambitious and resourceful, always striving to achieve your goals. Your determination and cleverness make you a proud Slytherin!',
+        'icon' => 'fas fa-dragon'
     ],
 ];
 
-// Calculate the personality based on score
+
+// Calculate the house based on score
 $score = isset($_SESSION['score']) ? $_SESSION['score'] : 0;
 
-// Determine personality type based on score
-$personality = '';
-if ($score >= 15) {
-    $personality = 'Extrovert';
+// Determine house based on score
+$house = '';
+if ($score >= 12) {
+    $house = 'Gryffindor';
 } elseif ($score >= 10) {
-    $personality = 'Creative Thinker';
-} elseif ($score >= 5) {
-    $personality = 'Logical Thinker';
+    $house = 'Hufflepuff';
+} elseif ($score >= 6) {
+    $house = 'Ravenclaw';
 } else {
-    $personality = 'Introvert';
+    $house = 'Slytherin';
 }
 
-// Get the description and icon for the personality type
-$description = $personality_types[$personality]['description'];
-$icon = $personality_types[$personality]['icon'];
-
+// Get the description and icon for the house
+$description = $houses[$house]['description'];
+$icon = $houses[$house]['icon'];
 ?>
 
 <!DOCTYPE html>
@@ -53,20 +53,21 @@ $icon = $personality_types[$personality]['icon'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Personality Result</title>
+    <title>Your Hogwarts House</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
-
     <div class="container">
-        <h1>You've Finished the Adventure!</h1>
+        <h1>Welcome to <?= htmlspecialchars($house) ?>!</h1>
         <i class="<?= htmlspecialchars($icon) ?> personality-icon"></i>
-        <p class="personality"><?= htmlspecialchars($personality) ?></p>
+        <p class="personality"><?= htmlspecialchars($house) ?></p>
         <p class="description"><?= htmlspecialchars($description) ?></p>
 
-        <a href="index.php" class="start-button">Take the Adventure Again</a>
+        <a href="index.php" class="start-button">Discover Your House Again</a>
     </div>
-
 </body>
 </html>
